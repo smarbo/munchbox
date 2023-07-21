@@ -17,3 +17,7 @@ NEXT: setup git with a github repo for munchbox and make the readme.md better
 21/07/2023:19:32 U2
 UPDATE: finally setup git
 NEXT: gonna start working on the frontend.
+
+21/07/2023:23:52 U3
+UPDATE: done navbar with react and tailwindcss
+NEXT: do homepage, make recipes easy etc.
