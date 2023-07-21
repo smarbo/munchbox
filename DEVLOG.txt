@@ -13,3 +13,7 @@
 21/07/2023:19:07 U1
 UPDATE: setup react and tailwind and removed the unnecessary files.
 NEXT: setup git with a github repo for munchbox and make the readme.md better
+
+21/07/2023:19:32 U2
+UPDATE: finally setup git
+NEXT: gonna start working on the frontend.
