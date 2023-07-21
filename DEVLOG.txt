@@ -1,0 +1,15 @@
+###### EDDIE'S DEVLOG ####
+##### MUNCHBOX #####
+### STARTED 21/07/2023 ###
+
+## DEVLOG TEMPLATE:
+## *DD/MM/YYYY:HH:MM U{the update number from this day, resets each day}
+## *UPDATE: {the update}
+## *NEXT: {what next}
+## IDEAS: {any ideas}
+
+## * = REQUIRED
+
+21/07/2023:19:07 U1
+UPDATE: setup react and tailwind and removed the unnecessary files.
+NEXT: setup git with a github repo for munchbox and make the readme.md better
