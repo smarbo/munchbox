@@ -79,8 +79,8 @@ export default function Navbar() {
                 </div>
             </div>
             <div
-                className={`Navbar-MobileMenu transition-all flex justify-evenly items-center duration-500 left-0 -z-10 absolute top-[70px] md:hidden bg-gray-900 w-full h-[90px] ${
-                    menuToggled ? "top-[70px]" : "top-[-20px]"
+                className={`Navbar-MobileMenu transition-all flex justify-evenly items-center duration-500 left-0  absolute top-[70px] md:hidden bg-gray-900 w-full h-[90px] ${
+                    menuToggled ? "top-[70px]" : "top-[-400px]"
                 }`}
             >
                 <MobileNavbarItem href="/#nav-home" icon={FaHome}>
