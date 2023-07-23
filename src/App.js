@@ -1,15 +1,13 @@
-import Navbar from "./components/Navbar";
-import HomeDisplay from "./components/HomeDisplay";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Home";
 
 export default function App() {
-    const date = new Date();
     return (
-        <div className="AppContainer overflow-hidden">
-            <Navbar />
-            <HomeDisplay />
-            <div className="HomeDisplay-Footer bg-gray-700 absolute bottom-0 w-full h-[50px] text-center pt-4 text-white font-bold left-0">
-                Munchbox {date.getFullYear()}© by Eddie Obrams
-            </div>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route path="/recipes" element={<div>Recipes</div>} />
+            </Routes>
+        </BrowserRouter>
     );
 }
