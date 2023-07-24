@@ -77,14 +77,14 @@ export default function HomeDisplay() {
                             index === imageIndex
                                 ? "currentImage"
                                 : "notCurrentImage"
-                        } lg:h-[400px]  transition-all duration-700 absolute lg:left-[800px] shadow-lg lg:translate-y-0 translate-y-[38vh] h-[250px] w-[250px] lg:w-[600px] lg:translate-x-0 left-[50%] translate-x-[-50%] hover:shadow-2xl lg:top-0 hover:top-[-10px] rounded-2xl border-8 border-solid border-gray-900 ${
+                        } lg:h-[400px]  transition-all duration-700 absolute rotate-0 lg:left-[800px] shadow-lg lg:translate-y-0 translate-y-[38vh] h-[250px] w-[250px] lg:w-[600px] lg:translate-x-0 left-[50%] translate-x-[-50%] hover:shadow-2xl lg:top-0 hover:top-[-10px] rounded-2xl border-8 border-solid border-gray-900 ${
                             index === imageIndex ? "opacity-1" : "opacity-0"
                         }`}
                     >
                         <Image
                             src={image}
                             alt="Delicious Food"
-                            className={`w-full object-cover h-full lg:w-[600px] rotate-0`}
+                            className={`w-full object-cover h-full lg:w-[600px] rotate-90`}
                             height={400}
                             width={400}
                         />
