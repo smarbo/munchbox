@@ -25,3 +25,7 @@ NEXT: do homepage
 24/07/2023:01:04 U1
 UPDATE: done auto image changing on home page, done login and signup forms on auth page, added validation on auth page
 NEXT: recipes page
+
+24/07/2023:14:02 U2
+UPDATE: fully migrated from create-react-app to next.js
+NEXT: recipes page
