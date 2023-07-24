@@ -41,6 +41,9 @@ export default function ExploreDisplay() {
             >
                 Mega Burger
             </Recipe>
+            <Recipe img="prawnsalad.jpg" description="Cookies or biscuits">
+                Gingerbread House
+            </Recipe>
             <Recipe
                 img="chicken1.jpg"
                 description="This flavourful chicken is very delicious and uses the flavour technique to enlighten the taste buds!"
@@ -48,7 +51,7 @@ export default function ExploreDisplay() {
                 Lemon & Herb Chicken Wings
             </Recipe>
             <Recipe
-                img="chicken3.jpg"
+                img="prawnsalad.jpg"
                 description="This flavourful chicken on the bone is very delicious and uses the flavour technique to enlighten the taste buds!"
             >
                 Chicken Leg
