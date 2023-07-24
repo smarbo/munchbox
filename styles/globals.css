@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
 
 @layer components {
     * {
@@ -9,12 +10,13 @@
     body {
         overflow: hidden;
     }
-    #movingText {
-        font-family: "Gochi Hand", cursive;
-    }
 
     #imageContainer{
         transition: all 0.8s linear;
+    }
+
+    #movingText{
+        font-weight: 900;
     }
 
     @media screen and (max-width: 768px) {

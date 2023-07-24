@@ -1,11 +1,12 @@
 import { FaPizzaSlice, FaHome, FaBook, FaUsers } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import { montserrat } from "@/components/Fonts";
 import { useState } from "react";
 
 function NavbarItem(props) {
     return props.type === "btn" ? (
         <div className="Navbar-Item">
-            <Link to={`${props.href}`}>
+            <Link href={`${props.href}`}>
                 <button className="bg-white text-gray-700 shadow-lg hover:shadow-none hover:bg-gray-400  transition-all duration-300 px-3 py-1 rounded">
                     {props.children}
                 </button>
@@ -13,7 +14,7 @@ function NavbarItem(props) {
         </div>
     ) : (
         <div className="Navbar-Item hover:text-xl text-lg transition-all duration-500 ease-in-out hover:underline underline-offset-8 hover:underline-offset-2">
-            <Link to={`${props.href}`}>{props.children}</Link>
+            <Link href={`${props.href}`}>{props.children}</Link>
         </div>
     );
 }
@@ -22,7 +23,7 @@ function MobileNavbarItem(props) {
     return (
         <div className="Navbar-MobileMenuItem text-center h-[60px] py-2 text-white capitalize text-sm font-bold px-3 flex flex-col items-center bg-gray-800 p-1 rounded-lg m-3">
             <props.icon color="white" size={28} />
-            <Link to={props.href} className="">
+            <Link href={props.href} className="">
                 {props.children}
             </Link>
         </div>
@@ -39,8 +40,10 @@ export default function Navbar() {
     };
 
     return (
-        <div className="Navbar flex bg-gray-800 py-5 px-10 min-w-full min-h-[70px] max-h-[70px] overflow-x-hidden pr-40 lg:pr-20">
-            <Link to={links.home}>
+        <div
+            className={`Navbar ${montserrat.className} flex bg-gray-800 py-5 px-10 min-w-full min-h-[70px] max-h-[70px] overflow-x-hidden pr-40 lg:pr-20`}
+        >
+            <Link href={links.home}>
                 <div className="Navbar-Icon font-black px- text-white flex flex-row justify-center items-center text-xl cursor-pointer select-none group">
                     <p className="rotate-[270deg] mr-5 group-hover:rotate-[0] transition-all duration-500">
                         <FaPizzaSlice color="white" size={32} />
