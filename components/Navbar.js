@@ -1,4 +1,4 @@
-import { FaPizzaSlice, FaHome, FaBook, FaUsers } from "react-icons/fa";
+import { FaPizzaSlice, FaHome, FaCompass, FaUsers } from "react-icons/fa";
 import Link from "next/link";
 import { montserrat } from "@/components/Fonts";
 import { useState } from "react";
@@ -34,7 +34,7 @@ export default function Navbar() {
     const [menuToggled, setMenuToggled] = useState(false);
     const links = {
         home: "/",
-        recipes: "/recipes",
+        explore: "/explore",
         social: "#social",
         getStarted: "/auth",
     };
@@ -54,7 +54,7 @@ export default function Navbar() {
 
             <div className="Navbar-Items md:flex md:text-white hidden md:font-bold md:text-lg md:min-w-full md:justify-evenly ">
                 <NavbarItem href={links.home}>Home</NavbarItem>
-                <NavbarItem href={links.recipes}>Recipes</NavbarItem>
+                <NavbarItem href={links.explore}>Explore</NavbarItem>
                 <NavbarItem href={links.social}>Social</NavbarItem>
                 <NavbarItem type="btn" href={links.getStarted}>
                     Get Started
@@ -96,8 +96,8 @@ export default function Navbar() {
                 <MobileNavbarItem href={links.home} icon={FaHome}>
                     Home
                 </MobileNavbarItem>
-                <MobileNavbarItem href={links.recipes} icon={FaBook}>
-                    Recipes
+                <MobileNavbarItem href={links.explore} icon={FaCompass}>
+                    Explore
                 </MobileNavbarItem>
                 <MobileNavbarItem href={links.social} icon={FaUsers}>
                     Social
