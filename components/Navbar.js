@@ -34,7 +34,7 @@ export default function Navbar() {
     const [menuToggled, setMenuToggled] = useState(false);
     const links = {
         home: "/",
-        recipes: "#recipes",
+        recipes: "/recipes",
         social: "#social",
         getStarted: "/auth",
     };
