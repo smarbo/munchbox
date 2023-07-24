@@ -187,7 +187,7 @@ export default function Authentication() {
     return (
         <div className="Authentication w-full min-h-screen">
             <Navbar />
-            <div className="AUTHCONTAINER justify-center items-center absolute top-[50%] left-[50%] rounded-lg flex flex-col -translate-y-[50%] -translate-x-[50%] bg-gray-700 w-[300px] md:w-[400px] lg:w-[500px] h-[450px] lg:h-[600px]">
+            <div className="AUTHCONTAINER justify-center shadow-2xl shadow-gray-950 items-center absolute top-[50%] left-[50%] rounded-lg flex flex-col -translate-y-[50%] -translate-x-[50%] bg-gray-700 w-[300px] md:w-[400px] lg:w-[500px] h-[450px] lg:h-[600px]">
                 {loginToggled ? <LoginForm /> : <SignupForm />}
                 <button
                     className={`relative text-white font-bold hover:underline ${
