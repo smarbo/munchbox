@@ -4,13 +4,25 @@ import { Link } from "react-router-dom";
 export default function HomeDisplay() {
     const texts = ["Store", "Create", "Share"];
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [imageIndex, setImageIndex] = useState(0);
+    const images = [
+        "./img/prawnsalad.jpg",
+        "./img/chicken1.jpg",
+        "./img/burger3.jpg",
+        "./img/chicken3.jpg",
+    ];
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+            setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+            console.log(currentIndex);
+            console.log(imageIndex);
         }, 2000);
 
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+        };
     });
 
     return (
@@ -42,26 +54,39 @@ export default function HomeDisplay() {
                             recipes you love.
                         </p>
                     </div>
-                    <div className="BUTTONSCONTAINER flex mt-10 justify-center items-center">
-                        <Link to="#get-started">
-                            <button className="bg-gray-800 text-md  hover:-translate-y-1 max-h-[90px] min-h-[90px] cursor-pointer transition-all text-white lg:text-2xl p-3 mr-4 px-6 rounded-lg hover:shadow-2xl">
+                    <div className="BUTTONSCONTAINER flex mt-10 items-center lg:justify-start justify-center">
+                        <Link to="/auth">
+                            <button className="bg-gray-800 text-md active:bg-gray-950  hover:translate-y-1 max-h-[75px] min-h-[75px] w-fit lg:min-w-[200px] border-4 border-gray-900 cursor-pointer transition-all text-white lg:text-2xl p-3 mr-4 px-6 rounded-lg shadow-2xl shadow-gray-700 hover:shadow-none">
                                 Get Started
                             </button>
                         </Link>
                         <Link to="#about">
-                            <button className="bg-gray-800 text-md hover:-translate-y-1 max-h-[90px] min-h-[90px] min-w-fit cursor-pointer transition-all text-white lg:text-2xl p-3 mr-4 px-6 rounded-lg hover:shadow-2xl">
+                            <button className="bg-gray-800 text-md active:bg-gray-950 hover:translate-y-1 max-h-[75px] min-h-[75px] w-fit lg:min-w-[200px] border-4 border-gray-900 cursor-pointer transition-all text-white lg:text-2xl p-3 mr-4 px-6 rounded-lg shadow-2xl shadow-gray-700 hover:shadow-none">
                                 About
                             </button>
                         </Link>
                     </div>
                 </div>
-
-                <img
-                    src="./frontpage.jpeg"
-                    alt="Delicious Food"
-                    className="w-[300px] lg:w-[600px] absolute lg:left-[800px] shadow-lg lg:translate-y-0 translate-y-[35vh] lg:translate-x-0 left-[50%] translate-x-[-50%] hover:shadow-2xl transition-all lg:top-0 hover:top-[-10px] rounded-2xl border-8 border-solid border-gray-900"
-                    width={600}
-                />
+                {images.map((image, index) => (
+                    <div
+                        id="imageContainer"
+                        key={index}
+                        className={`${
+                            index === imageIndex
+                                ? "currentImage"
+                                : "notCurrentImage"
+                        } lg:h-[400px]  transition-all duration-700 absolute lg:left-[800px] shadow-lg lg:translate-y-0 translate-y-[38vh] h-[250px] w-[250px] lg:w-[600px] lg:translate-x-0 left-[50%] translate-x-[-50%] hover:shadow-2xl lg:top-0 hover:top-[-10px] rounded-2xl border-8 border-solid border-gray-900 ${
+                            index === imageIndex ? "opacity-1" : "opacity-0"
+                        }`}
+                    >
+                        <img
+                            src={image}
+                            alt="Delicious Food"
+                            className={`w-full object-cover h-full lg:w-[600px]`}
+                            width={400}
+                        />
+                    </div>
+                ))}
             </div>
         </div>
     );

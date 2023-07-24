@@ -31,10 +31,16 @@ function MobileNavbarItem(props) {
 
 export default function Navbar() {
     const [menuToggled, setMenuToggled] = useState(false);
+    const links = {
+        home: "/",
+        recipes: "#recipes",
+        social: "#social",
+        getStarted: "/auth",
+    };
 
     return (
-        <div className="Navbar flex bg-gray-800 py-5 px-10 min-w-full min-h-[70px] overflow-x-hidden pr-40 lg:pr-20">
-            <Link to="/">
+        <div className="Navbar flex bg-gray-800 py-5 px-10 min-w-full min-h-[70px] max-h-[70px] overflow-x-hidden pr-40 lg:pr-20">
+            <Link to={links.home}>
                 <div className="Navbar-Icon font-black px- text-white flex flex-row justify-center items-center text-xl cursor-pointer select-none group">
                     <p className="rotate-[270deg] mr-5 group-hover:rotate-[0] transition-all duration-500">
                         <FaPizzaSlice color="white" size={32} />
@@ -44,10 +50,10 @@ export default function Navbar() {
             </Link>
 
             <div className="Navbar-Items md:flex md:text-white hidden md:font-bold md:text-lg md:min-w-full md:justify-evenly ">
-                <NavbarItem href="/#nav-home">Home</NavbarItem>
-                <NavbarItem href="/recipes">Recipes</NavbarItem>
-                <NavbarItem href="/#nav-social">Social</NavbarItem>
-                <NavbarItem type="btn" href="/#nav-cta">
+                <NavbarItem href={links.home}>Home</NavbarItem>
+                <NavbarItem href={links.recipes}>Recipes</NavbarItem>
+                <NavbarItem href={links.social}>Social</NavbarItem>
+                <NavbarItem type="btn" href={links.getStarted}>
                     Get Started
                 </NavbarItem>
             </div>
@@ -80,17 +86,17 @@ export default function Navbar() {
                 </div>
             </div>
             <div
-                className={`Navbar-MobileMenu transition-all flex justify-evenly items-center duration-500 left-0  absolute z-50 top-[70px] md:hidden bg-gray-900 w-full h-[90px] ${
-                    menuToggled ? "top-[70px]" : "top-[-120px] opacity-0"
+                className={`Navbar-MobileMenu transition-all flex origin-top-right justify-evenly items-center duration-150 z-10 left-0 absolute top-[70px] md:hidden bg-gray-900 w-full h-[90px] ${
+                    menuToggled ? "scale-1" : "scale-y-0"
                 }`}
             >
-                <MobileNavbarItem href="/#nav-home" icon={FaHome}>
+                <MobileNavbarItem href={links.home} icon={FaHome}>
                     Home
                 </MobileNavbarItem>
-                <MobileNavbarItem href="/#nav-recipes" icon={FaBook}>
+                <MobileNavbarItem href={links.recipes} icon={FaBook}>
                     Recipes
                 </MobileNavbarItem>
-                <MobileNavbarItem href="/#nav-social" icon={FaUsers}>
+                <MobileNavbarItem href={links.social} icon={FaUsers}>
                     Social
                 </MobileNavbarItem>
             </div>
