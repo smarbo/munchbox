@@ -84,7 +84,7 @@ export default function HomeDisplay() {
                         <Image
                             src={image}
                             alt="Delicious Food"
-                            className={`w-full object-cover h-full lg:w-[600px]`}
+                            className={`w-full object-cover h-full lg:w-[600px] rotate-0`}
                             height={400}
                             width={400}
                         />
