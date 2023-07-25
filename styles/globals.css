@@ -15,6 +15,11 @@
         transition: all 0.8s linear;
     }
 
+    .CUSTOMBG{
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+
     #movingText{
         font-weight: 900;
     }

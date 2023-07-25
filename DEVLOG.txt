@@ -29,3 +29,8 @@ NEXT: recipes page
 24/07/2023:14:02 U2
 UPDATE: fully migrated from create-react-app to next.js
 NEXT: recipes page
+
+25/07/2023:18:39 U1
+UPDATE: done recipes/explore page fully responsive
+NEXT: single recipe page- shows all details of a recipe
+
