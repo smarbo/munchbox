@@ -21,4 +21,5 @@ module.exports = {
         },
     },
     plugins: [],
+    purge: ["./public/**/*.html"],
 };
