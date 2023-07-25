@@ -67,7 +67,9 @@ const SuccessNotification = ({ duration, message }) => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-4 right-4 p-4 z-10 w-[400px] bg-green-900 text-white rounded-lg shadow-lg">
+        <div
+            className={`fixed bottom-4 right-4 p-4 z-10 w-[400px] ${raleway.className} bg-green-900 text-white rounded-lg shadow-lg`}
+        >
             <div className="text-lg font-bold">Success</div>
             <div className="text-sm">{message}</div>
             <div className="relative mt-2 h-3 w-full bg-gray-300 rounded">

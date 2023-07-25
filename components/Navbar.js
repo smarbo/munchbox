@@ -57,7 +57,7 @@ export default function Navbar() {
                 <NavbarItem href={links.explore}>Explore</NavbarItem>
                 <NavbarItem href={links.social}>Social</NavbarItem>
                 <NavbarItem type="btn" href={links.getStarted}>
-                    Get Started
+                    Hello, Eddie
                 </NavbarItem>
             </div>
             <div
