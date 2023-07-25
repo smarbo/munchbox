@@ -5,7 +5,7 @@ import Link from "next/link";
 function Recipe(props) {
     return (
         <Link
-            href="/recipe"
+            href={`/recipes/${props.children}`}
             className=" shadow-2xl shadow-gray-600 hover:shadow-none hover:translate-y-3  transition-all p-4 w-[250px] max-h-[500px] bg-gradient-to-br from-gray-700 via-gray-800 to-gray-700 bg-opacity-50 rounded-lg mx-4 my-3 flex flex-col justify-center items-center text-white ${montserrat.className} "
         >
             <div
@@ -28,7 +28,7 @@ function Recipe(props) {
                     <h1 className="RECIPETITLE text-center font-bold max-w-[200px] my-4 overflow-hidden whitespace-nowrap overflow-ellipsis ">
                         {props.children}
                     </h1>
-                    <p className="RECIPEDESCRIPTION max-w-[200px] overflow-hidden whitespace-pre-line text-left max-h-[100px]">
+                    <p className="RECIPEDESCRIPTION line-clamp-4 max-w-[200px] overflow-hidden whitespace-pre-line text-left max-h-[100px]">
                         {props.description}
                     </p>
                 </div>
@@ -44,7 +44,7 @@ export default function ExploreDisplay() {
                 img="burger3.jpg"
                 description="This meaty burger is quick to cook and has cheese meat and pepperonios!"
             >
-                Mega Burger
+                Gold Burger
             </Recipe>
             <Recipe img="prawnsalad.jpg" description="Cookies or biscuits">
                 Gingerbread House
