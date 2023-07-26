@@ -72,7 +72,7 @@ function Recipe(props) {
 export default function RecipePage() {
     const router = useRouter();
     const { recipename } = router.query;
-    // GET THE RECIPE, MAKE THIS FETCH FROM DB LATER
+    //
     const recipe =
         recipename === "Gold Burger"
             ? {
