@@ -124,7 +124,9 @@ How to Cook:
     return (
         <div className="RECIPEPAGE h-full w-full">
             <Head>
-                <title>Munchbox - Recipe Template</title>
+                <title>
+                    Munchbox - {recipe.name} by {recipe.creator}
+                </title>
             </Head>
             <Navbar />
             <Recipe
