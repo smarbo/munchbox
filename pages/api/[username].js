@@ -1,20 +1,17 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+require("dotenv").config();
 
 export default function handler(req, res) {
     const { method, headers } = req;
 
     if (method !== "GET") {
-        return res.status(405).json({ message: "Method POST Not Allowed" });
+        return res.status(405).json({ message: "wrong method" });
     }
 
-    if (!headers["API_KEY"] || headers["API_KEY"] !== process.env["API_KEY"]) {
-        return res.status(401).json({ message: "Invalid API Key" });
+    if (!headers.api_key || headers.api_key !== process.env.API_KEY) {
+        return res.status(401).json({ message: "invalid key" });
     }
 
     return res
         .status(200)
-        .json({
-            message: "User found successfully.",
-            user: req.query.username,
-        });
+        .json({ message: `good girl; username is ${req.query.username}` });
 }
