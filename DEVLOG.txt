@@ -38,3 +38,8 @@ NEXT: single recipe page- shows all details of a recipe
 UPDATE: done single recipe viewer page, made it fully responsive too.
 NEXT: create recipe
 COMMENT: ohmygod this was a hell of a struggle for some reason my tailwind config was broken xd and i was looking at netlify support and changin postcss config xD
+
+27/07/2023:23:49 U1
+UPDATE: done flex layout for new recipe page
+NEXT: fill in the blank containers, will be easier because i already made the layout
+COMMENT: havent written in here a long time ( one day ) but i have done updates 😀
