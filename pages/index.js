@@ -1,17 +1,13 @@
-import Footer from "@/components/Footer";
 import HomeDisplay from "@/components/HomeDisplay";
-import Navbar from "@/components/Navbar";
-import Head from "next/head";
+import Layout from "@/components/Layout";
 
 export default function Home() {
     return (
-        <div className="AppContainer overflow-hidden">
-            <Head>
-                <title>Munchbox - Recipes made easy.</title>
-            </Head>
-            <Navbar />
+        <Layout
+            title="Munchbox - Recipes made easy."
+            topClass="AppContainer overflow-hidden"
+        >
             <HomeDisplay />
-            <Footer />
-        </div>
+        </Layout>
     );
 }

@@ -1,13 +1,26 @@
-import { FaPizzaSlice, FaHome, FaCompass, FaUsers } from "react-icons/fa";
+import {
+    FaPizzaSlice,
+    FaHome,
+    FaCompass,
+    FaUsers,
+    FaPlus,
+} from "react-icons/fa";
 import Link from "next/link";
 import { montserrat } from "@/components/Fonts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function NavbarItem(props) {
     return props.type === "btn" ? (
         <div className="Navbar-Item">
-            <Link href={`${props.href}`}>
-                <button className="bg-white text-gray-700 shadow-lg hover:shadow-none hover:bg-gray-400  transition-all duration-300 px-3 py-1 rounded">
+            <Link href={`${props.activated ? props.href : "/"}`}>
+                <button
+                    className={`${
+                        props.activated
+                            ? "bg-white hover:shadow-none hover:bg-gray-400"
+                            : "bg-gray-800"
+                    } flex justify-center items-center text-gray-700 shadow-lg transition-all duration-300 px-3 py-1 rounded`}
+                    disabled={!props.activated}
+                >
                     {props.children}
                 </button>
             </Link>
@@ -30,14 +43,20 @@ function MobileNavbarItem(props) {
     );
 }
 
-export default function Navbar() {
+export default function Navbar(props) {
     const [menuToggled, setMenuToggled] = useState(false);
     const links = {
         home: "/",
         explore: "/explore",
         social: "#social",
         getStarted: "/auth",
+        newRecipe: "/recipes/new",
     };
+
+    const [activated, setActivated] = useState(false);
+    useEffect(() => {
+        setActivated(localStorage.getItem("username") ? true : false);
+    }, []);
 
     return (
         <div
@@ -56,8 +75,13 @@ export default function Navbar() {
                 <NavbarItem href={links.home}>Home</NavbarItem>
                 <NavbarItem href={links.explore}>Explore</NavbarItem>
                 <NavbarItem href={links.social}>Social</NavbarItem>
-                <NavbarItem type="btn" href={links.getStarted}>
-                    Hello, Eddie
+                <NavbarItem
+                    type="btn"
+                    href={links.newRecipe}
+                    activated={activated}
+                >
+                    <FaPlus size={16} color="#1f2937" className="mr-2" />
+                    New Recipe
                 </NavbarItem>
             </div>
             <div
@@ -101,6 +125,9 @@ export default function Navbar() {
                 </MobileNavbarItem>
                 <MobileNavbarItem href={links.social} icon={FaUsers}>
                     Social
+                </MobileNavbarItem>
+                <MobileNavbarItem href={links.newRecipe} icon={FaPlus}>
+                    Create
                 </MobileNavbarItem>
             </div>
         </div>

@@ -71,10 +71,10 @@ function Recipe(props) {
 
 export default function RecipePage() {
     const router = useRouter();
-    const { recipename } = router.query;
+    const { id } = router.query;
     //
     const recipe =
-        recipename === "Gold Burger"
+        id === "Gold Burger"
             ? {
                   name: "Gold Burger",
                   image: "burger3.jpg",

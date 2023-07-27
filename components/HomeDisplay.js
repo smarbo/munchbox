@@ -31,7 +31,7 @@ export default function HomeDisplay() {
         >
             <div className="HomeDisplay-Top text-xl text-center md:text-4xl items-center md:flex-row flex-col w-fit flex font-semibold text-gray-800">
                 <div className="textstuff flex flex-col">
-                    <h1 className="HomeDisplay-Title flex font-extrabold md:text-left text-center">
+                    <h1 className="HomeDisplay-Title flex font-extrabold sm:mt-[20px] lg:mt-0 md:text-left text-center">
                         Munchbox - Recipes made easy.
                     </h1>
                     <div className="flex">
@@ -77,7 +77,7 @@ export default function HomeDisplay() {
                             index === imageIndex
                                 ? "currentImage"
                                 : "notCurrentImage"
-                        } lg:h-[40vh]  transition-all duration-700 absolute rotate-0 lg:left-[47vw] md:h-[35vh] md:-translate-y-[17rem] md:w-[60vw] shadow-lg lg:translate-y-16 translate-y-[33vh] h-[40vh] w-[80vw] lg:w-[40vw] 2xl:w-[30vw] lg:translate-x-0 left-[50%] translate-x-[-50%] hover:shadow-2xl lg:top-0 hover:top-[-10px] rounded-2xl border-8 border-solid border-gray-900 ${
+                        } lg:h-[40vh] md:-top-[2vh] top-8 transition-all bg-transparent duration-700 ipad:-top-[20px] absolute rotate-0 lg:left-[47vw] md:h-[35vh] md:-translate-y-[17rem] md:w-[60vw] shadow-lg lg:translate-y-16 translate-y-[33vh] h-[35vh] w-[80vw] lg:w-[40vw] 2xl:w-[30vw] lg:translate-x-0 left-[50%] translate-x-[-50%] hover:shadow-2xl lg:top-0 hover:top-[-10px] rounded-2xl border-8 border-solid border-gray-900 ${
                             index === imageIndex ? "opacity-1" : "opacity-0"
                         }`}
                     >

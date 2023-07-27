@@ -1,6 +1,4 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Head from "next/head";
+import Layout from "@/components/Layout";
 import validateEmail from "@/utils/validateEmail";
 import { montserrat } from "@/components/Fonts";
 import { useState } from "react";
@@ -61,6 +59,7 @@ function validateForm(type, data) {
             });
         } else {
             console.log("Login Validation passed! Here should login");
+            window.localStorage["username"] = data.username;
         }
     }
 }
@@ -187,13 +186,10 @@ function SignupForm() {
 export default function Authentication() {
     const [loginToggled, setLoginToggled] = useState(false);
     return (
-        <div
-            className={`Authentication ${montserrat.className} w-full min-h-screen`}
+        <Layout
+            title="Munchbox - Authentication."
+            topClass={`Authentication ${montserrat.className} w-full min-h-screen`}
         >
-            <Head>
-                <title>Munchbox - Authentication</title>
-            </Head>
-            <Navbar />
             <div className="AUTHCONTAINER justify-center shadow-2xl shadow-gray-950 items-center absolute top-[50%] left-[50%] rounded-lg flex flex-col -translate-y-[50%] -translate-x-[50%] bg-gradient-to-tl from-gray-700 via-gray-800 to-gray-700 bg-opacity-50 w-[300px] md:w-[400px] lg:w-[500px] h-[450px] lg:h-[600px]">
                 {loginToggled ? <LoginForm /> : <SignupForm />}
                 <button
@@ -211,7 +207,6 @@ export default function Authentication() {
                         : "Don't have an account?"}
                 </button>
             </div>
-            <Footer />
-        </div>
+        </Layout>
     );
 }
