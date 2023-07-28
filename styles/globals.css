@@ -7,8 +7,16 @@
     * {
         user-select: none;
     }
+
+    *:focus{
+        outline: none;
+    }
     body {
         overflow: hidden;
+    }
+
+    .NEWRECIPEPAGE, .RECIPEMAKERCONTAINER{
+        overflow:auto;
     }
 
     #imageContainer{
@@ -23,6 +31,19 @@
         font-weight: 900;
     }
 
+    .scrollbar::-webkit-scrollbar{
+        cursor:pointer;
+    }
+
+    .scrollbar::-webkit-scrollbar-track{
+        border-radius: 20px !important;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb{
+        border-radius: 6px !important;
+        cursor: default;
+    }
+
     @media screen and (max-width: 768px) {
         #imageContainer.currentImage {
             opacity: 1;
@@ -34,6 +55,12 @@
             transform: "translate(-50%, 100%)";
             transition: all 0.8s linear;
         }
+    }
+
+    @media screen and (min-width: 1040px) {
+        .NEWRECIPEPAGE, .RECIPEMAKERCONTAINER{
+        overflow:auto !important;
+    }
     }
 
 }
