@@ -21,7 +21,7 @@ function Recipe(props) {
                 />
             </div>
 
-            <div className="RECIPECONTENT select-text  shadow-inner shadow-gray-800 text-gray-300 ml-[2%] text-base leading-normal pb-[30px] text-left whitespace-pre-line pl-[30px] sm:whitespace-pre sm:pr-[100px] sm:text-lg overflow-auto font-semibold absolute left-[50%] -translate-x-[50%] top-[30vh] sm:top-[50%] sm:translate-x-0 sm:-translate-y-[50%] sm:left-[34vw] w-[90%] h-[50%] sm:w-[50%] CUSTOMBG sm:h-[95%] rounded-3xl">
+            <div className="RECIPECONTENT select-text  shadow-inner shadow-gray-800 text-gray-300 ml-[2%] text-base leading-normal pb-[30px] text-left whitespace-pre-line pl-[30px] sm:whitespace-pre sm:pr-[0] sm:text-lg overflow-auto overflow-x-hidden font-semibold absolute left-[50%] -translate-x-[50%] top-[30vh] sm:top-[50%] sm:translate-x-0 sm:-translate-y-[50%] sm:left-[34vw] w-[90%] h-[50%] sm:w-[50%] CUSTOMBG sm:h-[95%] rounded-3xl">
                 <div className="MOBILERECIPEDETAILS sm:hidden w-[90%] h-[100px] mb-[150px]">
                     <div className="select-text">
                         <h1 className="text-center pt-3 select-text w-[150%]  pr-[150px] font-semibold underline text-white text-lg">
@@ -122,7 +122,7 @@ How to Cook:
 `,
               };
     return (
-        <div className="RECIPEPAGE h-full w-full">
+        <div className="RECIPEPAGE h-full w-full overflow-x-hidden">
             <Head>
                 <title>Munchbox - Recipe Template</title>
             </Head>
