@@ -29,7 +29,7 @@ export default function NewRecipePage() {
             title="Munchbox - New Recipe"
         >
             <form
-                className="RECIPEMAKERCONTAINER py-4 px-5 flex flex-col absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] w-[70%] h-[75%] bg-[rgba(40,41,48,0.65)] rounded-[22px]"
+                className="RECIPEMAKERCONTAINER py-4 px-5 flex flex-col absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] w-[90%] lg:w-[70%] h-[75%] bg-[rgba(40,41,48,0.65)] rounded-[22px]"
                 onSubmit={handleSubmit(() => {
                     console.log("Submitted form");
                 })}
@@ -40,7 +40,13 @@ export default function NewRecipePage() {
                 <div className={`w-full h-full flex flex-col lg:flex-row`}>
                     <div className="LEFT w-full lg:w-[50%] h-full  ">
                         <div className="TOP lg:h-[50%] w-full p-3">
-                            <div className="IMAGECONTAINER bg-[#434343] rounded-t-[8px] flex justify-center items-center w-full h-[30%] lg:h-[85%]">
+                            <div
+                                className={`IMAGECONTAINER ${
+                                    errors.recipeImage
+                                        ? "bg-[rgba(249,108,108,0.3)]"
+                                        : "bg-[#434343]"
+                                } rounded-t-[8px] flex justify-center items-center w-full min-h-[200px] h-[30%] lg:h-[85%]`}
+                            >
                                 {selectedImage ? (
                                     <Image
                                         src={URL.createObjectURL(selectedImage)}
@@ -50,7 +56,7 @@ export default function NewRecipePage() {
                                         height={400}
                                     />
                                 ) : (
-                                    <span className="font-bold text-[rgba(255,255,255,0.5)] text-xl">
+                                    <span className="font-bold text-[rgba(255,255,255,0.5)] m-4 text-center text-xl">
                                         No Image Selected
                                     </span>
                                 )}
@@ -70,6 +76,9 @@ export default function NewRecipePage() {
                                 type="file"
                                 accept="image/*"
                                 className="hidden"
+                                {...register("recipeImage", {
+                                    required: "Please select an image.",
+                                })}
                                 id="imageInput"
                                 onChange={handleImageChange}
                             />
@@ -84,12 +93,12 @@ export default function NewRecipePage() {
                                         return (
                                             <div
                                                 key={index}
-                                                className="w-full flex h-[40px] rounded-[8px] mt-4 text-white font-bold"
+                                                className="w-full flex h-[20px] lg:h-[40px] rounded-[8px] mt-4 text-white font-bold"
                                             >
-                                                <p className="bg-[rgba(166,166,166,0.60)] text-center rounded-lg mr-3 flex justify-center items-center ring w-[60%] ring-gray-400">
+                                                <p className="bg-[rgba(166,166,166,0.60)] line-clamp-1 overflow-ellipsis px-4 text-center lg:flex lg:justify-center lg:items-center text-sm rounded-md lg:rounded-lg mr-3 w-[60%] ring ring-gray-400 cursor-pointer">
                                                     {ingredient.name}
                                                 </p>
-                                                <p className="bg-[rgba(166,166,166,0.60)] text-center rounded-lg mr-3 flex justify-center items-center ring w-[30%] ring-gray-400">
+                                                <p className="bg-[rgba(166,166,166,0.60)] text-center text-sm flex justify-center items-center rounded-md lg:rounded-lg mr-3 ring w-[30%] ring-gray-400 cursor-pointer">
                                                     {ingredient.amount}
                                                 </p>
                                                 <button
@@ -109,20 +118,20 @@ export default function NewRecipePage() {
                                             </div>
                                         );
                                     })}
-                                    <div className="w-full flex h-[40px] rounded-[8px] mt-4 text-white font-bold">
+                                    <div className="w-full flex h-[20px] lg:h-[40px] rounded-[8px] mt-4 text-white font-bold">
                                         <input
-                                            className="bg-[rgba(166,166,166,0.60)] text-center rounded-lg mr-3 ring w-[60%] ring-gray-400 cursor-pointer"
+                                            className="bg-[rgba(166,166,166,0.60)] text-center text-md rounded-md lg:rounded-lg mr-3 ring w-[60%] ring-gray-400 cursor-pointer"
                                             placeholder="Name"
                                             id="nameInput"
                                         />
                                         <input
-                                            className="bg-[rgba(166,166,166,0.60)] text-center rounded-lg mr-3 ring w-[30%] ring-gray-400 cursor-pointer"
+                                            className="bg-[rgba(166,166,166,0.60)] text-center text-sm rounded-md lg:rounded-lg mr-3 ring w-[30%] ring-gray-400 cursor-pointer"
                                             placeholder="Amount"
                                             id="amountInput"
                                         />
                                         <button
                                             type="button"
-                                            className="bg-[rgba(112,157,255,0.71)] flex justify-center rounded-lg items-center ring w-[10%] ring-gray-400 cursor-pointer"
+                                            className="bg-[rgba(112,157,255,0.71)] flex justify-center rounded-md lg:rounded-lg items-center ring w-[10%] ring-gray-400 cursor-pointer"
                                             onClick={() => {
                                                 setIngredients([
                                                     ...ingredients,
@@ -163,7 +172,7 @@ export default function NewRecipePage() {
                      *********************************************** Right side begins *********************************************************************
                      */}
                     <div className="RIGHT w-full lg:w-[50%] h-full ">
-                        <div className="TOP h-[15%] flex w-full p-3  ">
+                        <div className="TOP h-[40%] lg:h-[15%] flex w-full p-3  ">
                             <input
                                 type="text"
                                 spellCheck="false"
@@ -184,12 +193,12 @@ export default function NewRecipePage() {
                             />
                             <input
                                 type="number"
-                                placeholder="Cook Time"
+                                placeholder="Time"
                                 className={` ml-2 ${
                                     errors.recipeTime
                                         ? "bg-[rgba(140,66,66,0.60)]"
                                         : "bg-[rgba(65,66,66,0.60)]"
-                                } px-8 rounded-[11px] border-[rgba(65,66,66,0.60)] text-center text-lg overflow-ellipsis border-[4px] placeholder:text-[#777777] max-w-[30%] font-semibold h-full relative focus:outline-none selection:bg-gray-700 text-white selection:text-gray-700`}
+                                } px-2 lg:px-8 rounded-[11px] border-[rgba(65,66,66,0.60)] text-center text-lg overflow-ellipsis border-[4px] placeholder:text-[#777777] max-w-[30%] font-semibold h-full relative focus:outline-none selection:bg-gray-700 text-white selection:text-gray-700`}
                                 {...register("recipeTime", {
                                     required: "Please enter a cook time.",
                                     min: {
@@ -201,12 +210,20 @@ export default function NewRecipePage() {
                         </div>
                         <div className="MIDDLE h-[72%] p-3 w-full  ">
                             <textarea
+                                {...register("recipeContent", {
+                                    required:
+                                        "Please enter the recipe content.",
+                                })}
                                 spellCheck="false"
                                 placeholder="Recipe Content"
-                                className="placeholder:text-[#777777] font-semibold pt-[20px] px-[40px] text-white resize-none rounded-[11px] bg-[rgba(0,0,0,0.30)] scrollbar scrollbar-track-[rgba(0,0,0,0.2)] scrollbar-thumb-[rgba(150,180,255,0.6)] focus:outline-none whitespace-pre overflow-auto border-[5px] border-[rgba(65,66,66,0.60)] w-full min-h-[calc(100%+300px)] lg:min-h-full"
+                                className={`${
+                                    errors.recipeContent
+                                        ? "bg-[rgba(140,66,66,0.60)]"
+                                        : "bg-[rgba(0,0,0,0.30)]"
+                                } placeholder:text-[#777777] font-semibold pt-[20px] px-[40px] text-white resize-none rounded-[11px] scrollbar scrollbar-track-[rgba(0,0,0,0.2)] scrollbar-thumb-[rgba(150,180,255,0.6)] focus:outline-none whitespace-pre overflow-auto border-[5px] border-[rgba(65,66,66,0.60)] w-full min-h-[calc(100%+300px)] lg:min-h-full`}
                             />
                         </div>
-                        <div className="BOTTOM lg:static absolute -bottom-[430px] lg:left-0 left-[50%] lg:translate-x-0 -translate-x-[50%] h-[8%] w-full  px-4 py-1">
+                        <div className="BOTTOM lg:static absolute -bottom-[550px] lg:left-0 left-[50%] lg:translate-x-0 -translate-x-[50%] h-[8%] w-full  px-4 py-1">
                             <button className="w-full h-full group bg-[#2A8EEA] hover:bg-[#106EEA] transition-all  flex justify-center items-center rounded-[8px] text-white font-bold ring-[7px] ring-[#156FC2]">
                                 Publish
                                 <FaPizzaSlice
