@@ -88,7 +88,7 @@ export default function NewRecipePage() {
                                 <h1 className="text-center w-full text-white font-bold underline text-xl ">
                                     Ingredients
                                 </h1>
-                                <div className="INGREDIENTS px-3 py-5 w-full h-[calc(100%-20px)] overflow-auto scrollbar scrollbar-track-[rgba(0,0,0,0.2)] scrollbar-thumb-[rgba(150,180,255,0.6)]">
+                                <div className="INGREDIENTS lg:mb-0 mb-5 px-3 py-5 w-full h-[calc(100%-20px)] overflow-auto scrollbar scrollbar-track-[rgba(0,0,0,0.2)] scrollbar-thumb-[rgba(150,180,255,0.6)]">
                                     {ingredients.map((ingredient, index) => {
                                         return (
                                             <div
@@ -133,29 +133,40 @@ export default function NewRecipePage() {
                                             type="button"
                                             className="bg-[rgba(112,157,255,0.71)] flex justify-center rounded-md lg:rounded-lg items-center ring w-[10%] ring-gray-400 cursor-pointer"
                                             onClick={() => {
-                                                setIngredients([
-                                                    ...ingredients,
-                                                    {
-                                                        name: document.getElementById(
+                                                if (
+                                                    document.getElementById(
+                                                        "nameInput"
+                                                    ).value &&
+                                                    document.getElementById(
+                                                        "amountInput"
+                                                    ).value
+                                                ) {
+                                                    setIngredients([
+                                                        ...ingredients,
+                                                        {
+                                                            name: document.getElementById(
+                                                                "nameInput"
+                                                            ).value,
+                                                            amount: document.getElementById(
+                                                                "amountInput"
+                                                            ).value,
+                                                        },
+                                                    ]);
+                                                    document.getElementById(
+                                                        "nameInput"
+                                                    ).value = "";
+                                                    document.getElementById(
+                                                        "amountInput"
+                                                    ).value = "";
+                                                    document
+                                                        .getElementById(
                                                             "nameInput"
-                                                        ).value,
-                                                        amount: document.getElementById(
-                                                            "amountInput"
-                                                        ).value,
-                                                    },
-                                                ]);
-                                                document.getElementById(
-                                                    "nameInput"
-                                                ).value = "";
-                                                document.getElementById(
-                                                    "amountInput"
-                                                ).value = "";
-                                                document
-                                                    .getElementById("nameInput")
-                                                    .focus();
-                                                document.getElementById(
-                                                    "amountInput"
-                                                ).tabIndex = 1;
+                                                        )
+                                                        .focus();
+                                                    document.getElementById(
+                                                        "amountInput"
+                                                    ).tabIndex = 1;
+                                                }
                                             }}
                                         >
                                             <FaPlusCircle
