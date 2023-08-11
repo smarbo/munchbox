@@ -42,7 +42,10 @@ async function createRecipe(req, res) {
         const base64Data = image.split(",")[1];
         const imageBuffer = Buffer.from(base64Data, "base64");
 
-        await fs.writeFile(`public/upload/recipe/${recipeId}.jpg`, imageBuffer);
+        await fs.writeFile(
+            `/public/upload/recipe/${recipeId}.jpg`,
+            imageBuffer
+        );
         await Recipe.create({
             title,
             time,
@@ -61,7 +64,11 @@ async function createRecipe(req, res) {
 
 // Function for GET allRecipes endpoint
 function allRecipes(req, res) {
-    res.status(200).json({
-        message: "This is the GET allRecipes endpoint",
-    });
+    try {
+        const recipes = Recipe.find({});
+        return res.status(200).json({ data: recipes });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: err });
+    }
 }
