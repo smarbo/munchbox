@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { useForm } from "react-hook-form";
 import { FaPizzaSlice, FaBackspace, FaPlusCircle } from "react-icons/fa";
 import { useState } from "react";
@@ -5,8 +6,10 @@ import Image from "next/image";
 import { montserrat } from "@/components/Fonts";
 import Layout from "@/components/Layout";
 
+const authKey = JSON.parse(process.env.NEXT_PUBLIC_AUTH_KEY)[0];
+
 export default function NewRecipePage() {
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const {
         register,
@@ -16,7 +19,22 @@ export default function NewRecipePage() {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        setSelectedImage(file);
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                const dataUrl = `data:image/jpeg;base64,${
+                    event.target.result.split(",")[1]
+                }`;
+                setSelectedImage(dataUrl);
+                console.log(selectedImage);
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            console.log("NO FILE");
+        }
     };
     const handleIngredientDelete = (index) => {
         const updatedIngredients = [...ingredients];
@@ -30,8 +48,38 @@ export default function NewRecipePage() {
         >
             <form
                 className="RECIPEMAKERCONTAINER py-4 px-5 flex flex-col absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] w-[90%] lg:w-[70%] h-[75%] bg-[rgba(40,41,48,0.65)] rounded-[22px]"
-                onSubmit={handleSubmit(() => {
-                    console.log("Submitted form");
+                onSubmit={handleSubmit(async (data) => {
+                    const body = {};
+                    body.title = data.recipeTitle;
+                    body.time = data.recipeTime;
+                    body.ingredients = ingredients;
+                    body.content = data.recipeContent;
+                    body.creator = "@eddieobrams";
+                    body.image = selectedImage;
+
+                    try {
+                        const res = await fetch("/api/recipes/", {
+                            method: "POST",
+                            headers: {
+                                "munchbox-auth-key": authKey,
+                                "Content-Type": "multipart/form-data",
+                            },
+                            body: JSON.stringify(body),
+                        });
+
+                        if (res.ok) {
+                            console.log("Recipe created successfully");
+                            console.log(await res.json());
+                        } else {
+                            console.log("Something went wrong.");
+                            console.log(await res.json());
+                        }
+                    } catch (err) {
+                        console.error("An error occurred: ", err);
+                    }
+                    console.log(
+                        `Submitted form with a title of ${data.recipeTitle}`
+                    );
                 })}
             >
                 <h1 className="w-full text-center text-white font-bold text-2xl">
@@ -49,7 +97,7 @@ export default function NewRecipePage() {
                             >
                                 {selectedImage ? (
                                     <Image
-                                        src={URL.createObjectURL(selectedImage)}
+                                        src={selectedImage}
                                         alt="Your Image"
                                         className=" w-[50%] lg:w-full h-[30%] lg:h-full rounded-t-[8px] object-cover"
                                         width={400}

@@ -1,12 +1,12 @@
-// Import .env file
+// Import necessary packages
 require("dotenv").config();
-
-// Import apihandler class which you made previously
 import ApiHandler from "@/servercomponents/apihandler";
+import Recipe from "@/models/recipe";
 import db from "@/servercomponents/db";
-import Recipe from "@/models/recipe"; // Use import instead of require
+const uploadPath = "public/upload/recipe/";
+const fs = require("fs/promises");
 
-// Export the apihandler object for /api/recipes/
+// Export the API route handler
 export default (req, res) => {
     new ApiHandler({
         post: createRecipe,
@@ -15,23 +15,51 @@ export default (req, res) => {
     }).handleRequest(req, res);
 };
 
-// Create recipe function for POST requests
+export const config = {
+    api: {
+        bodyParser: {
+            sizeLimit: "8mb",
+        },
+    },
+};
+
+// Function to create a recipe for POST requests
 async function createRecipe(req, res) {
-    const { title, time, creator, ingredients, content, image } = req.body;
-    const dbRes = await Recipe.create({
-        title,
-        time,
-        creator,
-        ingredients,
-        content,
-        image,
-    });
-    res.status(200).json({
-        message: await dbRes.creator,
-    });
+    const parsedBody = JSON.parse(req.body);
+    const { title, time, creator, ingredients, content, image } = parsedBody;
+    const timeId = Date.now().toString().slice(5, 12);
+
+    const recipeId = `${creator}-${timeId}`;
+
+    if (!title || !time || !creator || !ingredients || !content) {
+        return res.status(400).json({
+            error: "Invalid Data",
+            reqBody: [title, time, creator, ingredients, content],
+        });
+    }
+
+    try {
+        const base64Data = image.split(",")[1];
+        const imageBuffer = Buffer.from(base64Data, "base64");
+
+        await fs.writeFile(`public/upload/recipe/${recipeId}.jpg`, imageBuffer);
+        await Recipe.create({
+            title,
+            time,
+            creator,
+            ingredients,
+            content,
+            recipeId,
+        });
+        console.log("Success");
+        return res.status(200).json({ message: "Success!" });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: err });
+    }
 }
 
-// All recipes function for GET requests
+// Function for GET allRecipes endpoint
 function allRecipes(req, res) {
     res.status(200).json({
         message: "This is the GET allRecipes endpoint",
