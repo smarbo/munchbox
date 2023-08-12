@@ -1,10 +1,25 @@
 // Import necessary packages
 require("dotenv").config();
 import ApiHandler from "@/servercomponents/apihandler";
+import path from "path";
 import Recipe from "@/models/recipe";
 require("@/servercomponents/db");
-const uploadPath = "uploads/recipes/";
+const uploadPath = path.join(__dirname, "uploads", "recipes");
 const fs = require("fs/promises");
+
+async function initUploadDirs() {
+    try {
+        await fs.access(uploadPath);
+    } catch (error) {
+        if (error.code === "ENOENT") {
+            await fs.mkdir(uploadPath, { recursive: true });
+        } else {
+            throw error;
+        }
+    }
+}
+
+initUploadDirs();
 
 // Export the API route handler
 export default (req, res) => {
@@ -27,7 +42,6 @@ export const config = {
 async function createRecipe(req, res) {
     const parsedBody = JSON.parse(req.body);
     const { title, time, creator, ingredients, content, image } = parsedBody;
-
     const recipeId = Date.now();
     if (!title || !time || !creator || !ingredients || !content) {
         return res.status(400).json({
@@ -35,12 +49,12 @@ async function createRecipe(req, res) {
             reqBody: [title, time, creator, ingredients, content],
         });
     }
-
     try {
         const base64Data = image.split(",")[1];
         const imageBuffer = Buffer.from(base64Data, "base64");
-
-        await fs.writeFile(`${uploadPath}${recipeId}.jpg`, imageBuffer);
+        const filePath = path.join(uploadPath, `${recipeId}.jpg`);
+        console.log(filePath);
+        await fs.writeFile(filePath, imageBuffer);
         await Recipe.create({
             title,
             time,
