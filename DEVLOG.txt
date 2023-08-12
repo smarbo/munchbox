@@ -43,3 +43,7 @@ COMMENT: ohmygod this was a hell of a struggle for some reason my tailwind confi
 UPDATE: done flex layout for new recipe page
 NEXT: fill in the blank containers, will be easier because i already made the layout
 COMMENT: havent written in here a long time ( one day ) but i have done updates 😀
+
+12/08/2023:00:06 U1
+UPDATE: kinda done backend for create recipe page
+NEXT: fix image uploads to vercel

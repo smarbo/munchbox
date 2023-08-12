@@ -2,8 +2,8 @@
 require("dotenv").config();
 import ApiHandler from "@/servercomponents/apihandler";
 import Recipe from "@/models/recipe";
-import db from "@/servercomponents/db";
-const uploadPath = "public/upload/recipe/";
+require("@/servercomponents/db");
+const uploadPath = "uploads/recipes/";
 const fs = require("fs/promises");
 
 // Export the API route handler
@@ -27,10 +27,8 @@ export const config = {
 async function createRecipe(req, res) {
     const parsedBody = JSON.parse(req.body);
     const { title, time, creator, ingredients, content, image } = parsedBody;
-    const timeId = Date.now().toString().slice(5, 12);
 
-    const recipeId = `${creator}-${timeId}`;
-
+    const recipeId = Date.now();
     if (!title || !time || !creator || !ingredients || !content) {
         return res.status(400).json({
             error: "Invalid Data",
@@ -42,10 +40,7 @@ async function createRecipe(req, res) {
         const base64Data = image.split(",")[1];
         const imageBuffer = Buffer.from(base64Data, "base64");
 
-        await fs.writeFile(
-            `/public/upload/recipe/${recipeId}.jpg`,
-            imageBuffer
-        );
+        await fs.writeFile(`${uploadPath}${recipeId}.jpg`, imageBuffer);
         await Recipe.create({
             title,
             time,
