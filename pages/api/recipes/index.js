@@ -4,7 +4,7 @@ import ApiHandler from "@/servercomponents/apihandler";
 import path from "path";
 import Recipe from "@/models/recipe";
 require("@/servercomponents/db");
-const uploadPath = path.join("var", "task", "uploads", "recipes");
+const uploadPath = "/" + path.join("var", "task", "uploads", "recipes");
 const fs = require("fs/promises");
 
 async function initUploadDirs() {
