@@ -28,8 +28,14 @@ function Recipe(props) {
                     <h1 className="RECIPETITLE text-center font-bold max-w-[200px] my-4 overflow-hidden whitespace-nowrap overflow-ellipsis ">
                         {props.children}
                     </h1>
-                    <p className="RECIPEDESCRIPTION line-clamp-4 max-w-[200px] overflow-hidden whitespace-pre-line text-left max-h-[100px]">
+                    <p className="RECIPEBOTTOM line-clamp-4 max-w-[200px] overflow-hidden whitespace-pre-line text-left max-h-[100px]">
                         {props.description}
+                        By{" "}
+                        <span className="font-semibold hover:underline">
+                            @eddieobrams
+                        </span>
+                        <br />
+                        Takes <span className="font-semibold">25</span> minutes
                     </p>
                 </div>
             </div>
@@ -40,51 +46,14 @@ function Recipe(props) {
 export default function ExploreDisplay() {
     return (
         <div className="EXPLOREDISPLAY pb-[200px] pt-[20px] max-w-full h-full flex mx-[30px] justify-center mt-10 flex-wrap overflow-scroll shadow-inner">
-            <Recipe
-                img="burger3.jpg"
-                description="This meaty burger is quick to cook and has cheese meat and pepperonios!"
-            >
-                Gold Burger
-            </Recipe>
-            <Recipe img="prawnsalad.jpg" description="Cookies or biscuits">
-                Gingerbread House
-            </Recipe>
-            <Recipe
-                img="chicken1.jpg"
-                description="This flavourful chicken is very delicious and uses the flavour technique to enlighten the taste buds!"
-            >
-                Lemon & Herb Chicken Wings
-            </Recipe>
-            <Recipe
-                img="prawnsalad.jpg"
-                description="This flavourful chicken on the bone is very delicious and uses the flavour technique to enlighten the taste buds!"
-            >
-                Chicken Leg
-            </Recipe>
-            <Recipe
-                img="chicken3.jpg"
-                description="This flavourful chicken on the bone is very delicious and uses the flavour technique to enlighten the taste buds!"
-            >
-                Chicken Leg
-            </Recipe>
-            <Recipe
-                img="chicken3.jpg"
-                description="This flavourful chicken on the bone is very delicious and uses the flavour technique to enlighten the taste buds!"
-            >
-                Chicken Leg
-            </Recipe>
-            <Recipe
-                img="chicken3.jpg"
-                description="This flavourful chicken on the bone is very delicious and uses the flavour technique to enlighten the taste buds!"
-            >
-                Chicken Leg
-            </Recipe>
-            <Recipe
-                img="chicken3.jpg"
-                description="This flavourful chicken on the bone is very delicious and uses the flavour technique to enlighten the taste buds!"
-            >
-                Chicken Leg
-            </Recipe>
+            <Recipe img="burger3.jpg">Gold Burger</Recipe>
+            <Recipe img="prawnsalad.jpg">Gingerbread House</Recipe>
+            <Recipe img="chicken1.jpg">Lemon & Herb Chicken Wings</Recipe>
+            <Recipe img="prawnsalad.jpg">Chicken Leg</Recipe>
+            <Recipe img="chicken3.jpg">Chicken Leg</Recipe>
+            <Recipe img="chicken3.jpg">Chicken Leg</Recipe>
+            <Recipe img="chicken3.jpg">Chicken Leg</Recipe>
+            <Recipe img="chicken3.jpg">Chicken Leg</Recipe>
         </div>
     );
 }

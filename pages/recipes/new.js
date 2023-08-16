@@ -24,11 +24,8 @@ export default function NewRecipePage() {
             const reader = new FileReader();
 
             reader.onload = (event) => {
-                const dataUrl = `data:image/jpeg;base64,${
-                    event.target.result.split(",")[1]
-                }`;
+                const dataUrl = `${event.target.result}`;
                 setSelectedImage(dataUrl);
-                console.log(selectedImage);
             };
 
             reader.readAsDataURL(file);

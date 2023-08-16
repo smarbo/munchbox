@@ -4,22 +4,14 @@ import ApiHandler from "@/servercomponents/apihandler";
 import path from "path";
 import Recipe from "@/models/recipe";
 require("@/servercomponents/db");
-const uploadPath = "/" + path.join("var", "task", "uploads", "recipes");
-const fs = require("fs/promises");
+// use cloudinary!!!
+import { v2 as cloudinary } from "cloudinary";
 
-async function initUploadDirs() {
-    try {
-        await fs.access(uploadPath);
-    } catch (error) {
-        if (error.code === "ENOENT") {
-            await fs.mkdir(uploadPath, { recursive: true });
-        } else {
-            throw error;
-        }
-    }
-}
-
-initUploadDirs();
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET,
+});
 
 // Export the API route handler
 export default (req, res) => {
@@ -40,9 +32,20 @@ export const config = {
 
 // Function to create a recipe for POST requests
 async function createRecipe(req, res) {
-    const parsedBody = JSON.parse(req.body);
+    let parsedBody = {};
+    try {
+        parsedBody = JSON.parse(req.body);
+    } catch {
+        return res.status(400).json({
+            error: "Invalid Request",
+        });
+    }
     const { title, time, creator, ingredients, content, image } = parsedBody;
     const recipeId = Date.now();
+
+    const imageParts = image.split(",");
+    const imageBuffer = Buffer.from(imageParts[1], "base64");
+
     if (!title || !time || !creator || !ingredients || !content) {
         return res.status(400).json({
             error: "Invalid Data",
@@ -50,21 +53,30 @@ async function createRecipe(req, res) {
         });
     }
     try {
-        const base64Data = image.split(",")[1];
-        const imageBuffer = Buffer.from(base64Data, "base64");
-        const filePath = path.join(uploadPath, `${recipeId}.jpg`);
-        console.log(filePath);
-        await fs.writeFile(filePath, imageBuffer);
-        await Recipe.create({
-            title,
-            time,
-            creator,
-            ingredients,
-            content,
-            recipeId,
-        });
-        console.log("Success");
-        return res.status(200).json({ message: "Success!" });
+        const cloudinaryRes = await cloudinary.uploader
+            .upload_stream(
+                { resource_type: "image" },
+                async (error, result) => {
+                    if (error) {
+                        console.error("Error uploading image.");
+                        return res.status(500).json({
+                            error: "Error uploading image to cloudinary",
+                        });
+                    }
+                    await Recipe.create({
+                        title,
+                        time,
+                        creator,
+                        ingredients,
+                        content,
+                        recipeId,
+                        image: result.secure_url,
+                    });
+                    console.log("Success");
+                    return res.status(200).json({ message: "Success!" });
+                }
+            )
+            .end(imageBuffer);
     } catch (err) {
         console.log(err);
         return res.status(500).json({ error: err });
@@ -72,9 +84,9 @@ async function createRecipe(req, res) {
 }
 
 // Function for GET allRecipes endpoint
-function allRecipes(req, res) {
+async function allRecipes(req, res) {
     try {
-        const recipes = Recipe.find({});
+        const recipes = await Recipe.find({});
         return res.status(200).json({ data: recipes });
     } catch (err) {
         console.log(err);
