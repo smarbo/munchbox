@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+require("dotenv").config();
 import ExploreDisplay from "@/components/ExploreDisplay";
 
 export default function Explore({ data }) {
@@ -16,12 +17,19 @@ export default function Explore({ data }) {
 }
 
 export async function getServerSideProps() {
-    const response = await fetch("http://localhost:3000/api/recipes/", {
-        method: "GET",
-        headers: {
-            "munchbox-auth-key": [...JSON.parse(process.env["AUTH_KEY"])][0],
-        },
-    });
+    const response = await fetch(
+        process.env["NEXT_PUBLIC_RUN_ENV"] === "dev"
+            ? process.env["NEXT_PUBLIC_DEV_BASE_URL"]
+            : process.env["NEXT_PUBLIC_PROD_BASE_URL"],
+        {
+            method: "GET",
+            headers: {
+                "munchbox-auth-key": [
+                    ...JSON.parse(process.env["AUTH_KEY"]),
+                ][0],
+            },
+        }
+    );
     const data = await response.json();
     return {
         props: {
