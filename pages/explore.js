@@ -19,8 +19,8 @@ export default function Explore({ data }) {
 export async function getServerSideProps() {
     const response = await fetch(
         process.env["NEXT_PUBLIC_RUN_ENV"] === "dev"
-            ? process.env["NEXT_PUBLIC_DEV_BASE_URL"]
-            : process.env["NEXT_PUBLIC_PROD_BASE_URL"],
+            ? `${process.env["NEXT_PUBLIC_DEV_BASE_URL"]}/api/recipes`
+            : `${process.env["NEXT_PUBLIC_PROD_BASE_URL"]}/api/recipes`,
         {
             method: "GET",
             headers: {
