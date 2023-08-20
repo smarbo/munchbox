@@ -38,7 +38,10 @@ function Recipe(props) {
                     <div className="INGREDIENTS h-[70%] overflow-y-auto overflow-x-hidden overflow-ellipsis">
                         {props.ingredients.map((i) => {
                             return (
-                                <div className="INgredient bg-[rgba(0,0,0,0.5)] shadow-md pl-2 text-white mb-2 rounded mx-1">
+                                <div
+                                    key={i.name}
+                                    className="INgredient bg-[rgba(0,0,0,0.5)] shadow-md pl-2 text-white mb-2 rounded mx-1"
+                                >
                                     {i.name}: {i.amount}
                                 </div>
                             );
@@ -89,7 +92,7 @@ export default function RecipePage(props) {
     return (
         <div className="RECIPEPAGE h-full w-full overflow-x-hidden">
             <Head>
-                <title>Munchbox - {recipe.creator}'s recipe.</title>
+                <title>Munchbox - {recipe.creator}&apos;s recipe.</title>
             </Head>
             <Navbar />
             <Recipe
