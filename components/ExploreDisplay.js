@@ -1,13 +1,55 @@
 import Image from "next/image";
 import { montserrat } from "@/components/Fonts";
+import { FaTrash } from "react-icons/fa";
+require("dotenv").config();
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 function Recipe(props) {
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        if (localStorage.getItem("username") === "admin") {
+            return setIsAdmin(true);
+        }
+    }, []);
+
+    async function handleDeleteButton() {
+        const response = await fetch(
+            process.env["NEXT_PUBLIC_RUN_ENV"] === "dev"
+                ? `${process.env["NEXT_PUBLIC_DEV_BASE_URL"]}/api/recipes/${props.id}`
+                : `${process.env["NEXT_PUBLIC_PROD_BASE_URL"]}/api/recipes/${props.id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "munchbox-auth-key": [
+                        ...JSON.parse(process.env["NEXT_PUBLIC_AUTH_KEY"]),
+                    ][0],
+                },
+            }
+        );
+
+        if (response.ok) {
+            window.location.href = "/explore";
+        }
+    }
+
     return (
         <Link
             href={`/recipes/${props.link}`}
-            className=" shadow-2xl shadow-gray-600 hover:shadow-none hover:translate-y-3  transition-all p-4 w-[250px] max-h-[500px] bg-gradient-to-br from-gray-700 via-gray-800 to-gray-700 bg-opacity-50 rounded-lg mx-4 my-3 flex flex-col justify-center items-center text-white ${montserrat.className} "
+            className=" shadow-2xl shadow-gray-600 group hover:shadow-none hover:translate-y-3  transition-all p-4 w-[250px] max-h-[500px] bg-gradient-to-br from-gray-700 via-gray-800 to-gray-700 bg-opacity-50 rounded-lg mx-4 my-3 flex flex-col justify-center items-center text-white ${montserrat.className} "
         >
+            {isAdmin ? (
+                <button
+                    onClick={handleDeleteButton}
+                    className="absolute z-50 bg-red-700 hover:bg-red-800 transition-all p-3 group-hover:scale-100 scale-0 origin-center rounded-[50%] right-0 translate-x-[10%] -translate-y-[10%] top-0"
+                >
+                    <FaTrash color="white" size={16} />
+                </button>
+            ) : (
+                ""
+            )}
+
             <div
                 className={`RECIPECONTAINER ${montserrat.className}`}
                 style={{
@@ -52,12 +94,13 @@ export default function ExploreDisplay({ data }) {
                 data.map((r) => {
                     return (
                         <Recipe
-                            key={r.recipeId}
-                            link={r.recipeId}
+                            key={r._id}
+                            link={r._id}
                             img={r.image}
                             time={r.time}
                             creator={r.creator}
                             title={r.title}
+                            id={r._id}
                         />
                     );
                 })

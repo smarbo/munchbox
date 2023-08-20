@@ -1,13 +1,10 @@
 // Import necessary packages
 require("dotenv").config();
 import ApiHandler from "@/servercomponents/apihandler";
-import path from "path";
 import Recipe from "@/models/recipe";
 require("@/servercomponents/db");
 // use cloudinary!!!
 import { v2 as cloudinary } from "cloudinary";
-
-console.log(process.env["CLOUDINARY_NAME"]);
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
@@ -18,8 +15,8 @@ cloudinary.config({
 // Export the API route handler
 export default (req, res) => {
     new ApiHandler({
-        post: createRecipe,
-        get: allRecipes,
+        post: POST,
+        get: GET,
         authKeys: [...JSON.parse(process.env["AUTH_KEY"])],
     }).handleRequest(req, res);
 };
@@ -33,7 +30,7 @@ export const config = {
 };
 
 // Function to create a recipe for POST requests
-async function createRecipe(req, res) {
+async function POST(req, res) {
     let parsedBody = {};
     try {
         parsedBody = JSON.parse(req.body);
@@ -43,7 +40,6 @@ async function createRecipe(req, res) {
         });
     }
     const { title, time, creator, ingredients, content, image } = parsedBody;
-    const recipeId = Date.now();
 
     const imageParts = image.split(",");
     const imageBuffer = Buffer.from(imageParts[1], "base64");
@@ -71,7 +67,6 @@ async function createRecipe(req, res) {
                         creator,
                         ingredients,
                         content,
-                        recipeId,
                         image: result.secure_url,
                     });
                     console.log("Success");
@@ -86,7 +81,7 @@ async function createRecipe(req, res) {
 }
 
 // Function for GET allRecipes endpoint
-async function allRecipes(req, res) {
+async function GET(req, res) {
     try {
         const recipes = await Recipe.find({});
         return res.status(200).json({ data: recipes });
