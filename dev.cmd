@@ -1,0 +1,3 @@
+@echo off
+echo // Development Server Loading...
+npm run dev
