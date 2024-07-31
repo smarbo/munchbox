@@ -39,7 +39,6 @@ async function validateForm(type, data, router, err, errNum) {
         errorInput.style.background = "rgba(212, 17, 17, 0.64)";
       });
     } else {
-      console.log("signup validation pass");
       const res = await fetch("/api/users", {
         method: "POST",
         headers: {
@@ -49,7 +48,14 @@ async function validateForm(type, data, router, err, errNum) {
         body: JSON.stringify(data),
       });
       if (res.ok) {
-        console.log("User created success");
+				await fetch("/api/users/login", {
+					method: "POST",
+					headers: {
+						"munchbox-auth-key": authKey,
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ username: data.username, password: data.password })
+				})
         router.push("/");
       } else if (res.status === 409) {
         err(
@@ -57,8 +63,6 @@ async function validateForm(type, data, router, err, errNum) {
         );
         errNum(Date.now());
       } else {
-        console.log("User created fail");
-        console.log(res.body.message);
         err("Server error. Try again later.");
         errNum(Date.now());
       }
@@ -83,7 +87,6 @@ async function validateForm(type, data, router, err, errNum) {
         errorInput.style.background = "rgba(212, 17, 17, 0.64)";
       });
     } else {
-      console.log("login validation pass");
       const res = await fetch("/api/users/login", {
         method: "POST",
         headers: {
@@ -96,14 +99,11 @@ async function validateForm(type, data, router, err, errNum) {
         }),
       });
       if (res.ok) {
-        console.log("User logged in");
         router.push("/");
       } else if (res.status === 404) {
-        console.log("User not found");
         err("User not found.");
         errNum(Date.now());
       } else if (res.status === 401) {
-        console.log("Bad password");
         err("Incorrect password.");
         errNum(Date.now());
       }

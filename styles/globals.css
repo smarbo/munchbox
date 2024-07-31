@@ -1,66 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap");
 
 @layer components {
-    * {
-        user-select: none;
+  *:focus {
+    outline: none;
+  }
+  body {
+    overflow: hidden;
+  }
+
+  .NEWRECIPEPAGE,
+  .RECIPEMAKERCONTAINER {
+    overflow: auto;
+  }
+
+  #imageContainer {
+    transition: all 0.8s linear;
+  }
+
+  .CUSTOMBG {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  #movingText {
+    font-weight: 900;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    cursor: pointer;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 20px !important;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 6px !important;
+    cursor: default;
+  }
+
+  @media screen and (max-width: 768px) {
+    #imageContainer.currentImage {
+      opacity: 1;
     }
 
-    *:focus{
-        outline: none;
+    #imageContainer.notCurrentImage {
+      opacity: 0;
+      left: "50%";
+      transform: "translate(-50%, 100%)";
+      transition: all 0.8s linear;
     }
-    body {
-        overflow: hidden;
-    }
+  }
 
-    .NEWRECIPEPAGE, .RECIPEMAKERCONTAINER{
-        overflow:auto;
+  @media screen and (min-width: 1040px) {
+    .NEWRECIPEPAGE,
+    .RECIPEMAKERCONTAINER {
+      overflow: auto !important;
     }
-
-    #imageContainer{
-        transition: all 0.8s linear;
-    }
-
-    .CUSTOMBG{
-        background-color: rgba(0,0,0,0.1);
-    }
-
-    #movingText{
-        font-weight: 900;
-    }
-
-    .scrollbar::-webkit-scrollbar{
-        cursor:pointer;
-    }
-
-    .scrollbar::-webkit-scrollbar-track{
-        border-radius: 20px !important;
-    }
-
-    .scrollbar::-webkit-scrollbar-thumb{
-        border-radius: 6px !important;
-        cursor: default;
-    }
-
-    @media screen and (max-width: 768px) {
-        #imageContainer.currentImage {
-            opacity: 1;
-        }
-
-        #imageContainer.notCurrentImage {
-            opacity: 0;
-            left: "50%";
-            transform: "translate(-50%, 100%)";
-            transition: all 0.8s linear;
-        }
-    }
-
-    @media screen and (min-width: 1040px) {
-        .NEWRECIPEPAGE, .RECIPEMAKERCONTAINER{
-        overflow:auto !important;
-    }
-    }
-
+  }
 }

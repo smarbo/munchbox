@@ -15,6 +15,7 @@ export default function NewRecipePage() {
 
   const [selectedImage, setSelectedImage] = useState("");
   const [ingredients, setIngredients] = useState([]);
+  const [username, setUsername] = useState("");
   const {
     register,
     handleSubmit,
@@ -34,6 +35,17 @@ export default function NewRecipePage() {
           router.push("/403");
         }
       });
+
+    fetch("/api/users/", {
+      method: "GET",
+      headers: {
+        "munchbox-auth-key": authKey,
+      },
+    }).then((res) =>
+      res.json().then((data) => {
+        setUsername(data.username);
+      })
+    );
   }, []);
 
   const handleImageChange = (e) => {
@@ -48,9 +60,7 @@ export default function NewRecipePage() {
       };
 
       reader.readAsDataURL(file);
-    } else {
-      console.log("NO FILE");
-    }
+    } 
   };
   const handleIngredientDelete = (index) => {
     const updatedIngredients = [...ingredients];
@@ -65,35 +75,39 @@ export default function NewRecipePage() {
       <form
         className="RECIPEMAKERCONTAINER py-4 px-5 flex flex-col absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] w-[90%] lg:w-[70%] h-[75%] bg-[rgba(40,41,48,0.65)] rounded-[22px]"
         onSubmit={handleSubmit(async (data) => {
-          const body = {};
-          body.title = data.recipeTitle;
-          body.time = data.recipeTime;
-          body.ingredients = ingredients;
-          body.content = data.recipeContent;
-          body.creator = "@eddieobrams";
-          body.image = selectedImage;
-
+          // const body = {};
+          // body.title = data.recipeTitle;
+          // body.time = data.recipeTime;
+          // body.ingredients = ingredients;
+          // body.content = data.recipeContent;
+          // body.creator = username;
+          // body.image = selectedImage;
           try {
-            const res = await fetch("/api/recipes/", {
+            const res = await fetch("http://localhost:3000/api/recipes/", {
               method: "POST",
               headers: {
                 "munchbox-auth-key": authKey,
-                "Content-Type": "multipart/form-data",
+                "content-type": "multipart/form-data",
               },
-              body: JSON.stringify(body),
+              body: JSON.stringify({
+                title: data.recipeTitle,
+                time: data.recipeTime,
+                ingredients: ingredients,
+                content: data.recipeContent,
+                creator: username,
+                image: selectedImage,
+              }),
             });
-
             if (res.ok) {
-              console.log("Recipe created successfully");
-              console.log(await res.json());
-            } else {
-              console.log("Something went wrong.");
-              console.log(await res.json());
-            }
+              if (res.status === 200) {
+                res.json().then((data) => {
+                  router.push(data.id);
+                });
+              }
+            } 
           } catch (err) {
             console.error("An error occurred: ", err);
           }
-          console.log(`Submitted form with a title of ${data.recipeTitle}`);
         })}
       >
         <h1 className="w-full text-center text-white font-bold text-2xl">

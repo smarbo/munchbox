@@ -14,7 +14,7 @@ function Recipe(props) {
             <div className="RECIPEIMAGE w-full sm:w-[30vw] h-[25vh] sm:h-[40vh] shadow-none sm:shadow-2xl transition-all hover:shadow-none shadow-gray-800">
                 <Image
                     src={props.image}
-                    alt={props.name}
+                    alt={"Recipe Image"}
                     width={400}
                     height={400}
                     className="object-cover h-full w-full rounded-xl transition-all"
@@ -60,7 +60,7 @@ function Recipe(props) {
                     {props.name}
                 </div>
                 <div className="text-white select-text text-md">
-                    By {props.creator}
+                    By @{props.creator}
                 </div>
                 <div className="text-white select-text text-md flex justify-center items-center">
                     <FaClock size={16} className="mr-2" /> {props.time} minutes
