@@ -88,7 +88,7 @@ export default function LHomeDisplay() {
             recipes.map((r, i) => {
               r = r.recipe;
               let opacity = i % 2 === 0 ? "bg-opacity-30" : "bg-opacity-20";
-              return <Link href={`/recipes/${r._id}`}><div onClick={() => { handleDelete(r._id) }} className="absolute w-[18px] translate-y-[3px] translate-x-[-2px] text-red-500 rounded-full h-[18px] right-[51%] bg-red-500"></div><div className={`pl-2 hover:bg-blue-500 transition-all rounded-sm bg-black ${opacity}`}>• {r.title} •</div></Link>
+              return <Link key={i} href={`/recipes/${r._id}`}><div onClick={() => { handleDelete(r._id) }} className="absolute w-[18px] translate-y-[3px] translate-x-[-2px] text-red-500 rounded-full h-[18px] right-[51%] bg-red-500"></div><div className={`pl-2 hover:bg-blue-500 transition-all rounded-sm bg-black ${opacity}`}>• {r.title} •</div></Link>
             })
           }
         </div>
