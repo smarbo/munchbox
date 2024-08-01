@@ -80,8 +80,8 @@ function Recipe(props) {
 
 export default function ExploreDisplay({ data }) {
   const [isAdmin, setIsAdmin] = useState(false);
-    useEffect(() => {
-        fetch("/api/users", {
+  useEffect(() => {
+    fetch("/api/users", {
       method: "GET",
       headers: {
         "munchbox-auth-key": authKey,
@@ -89,9 +89,9 @@ export default function ExploreDisplay({ data }) {
     })
       .then((res) => res.json())
       .then((data) => {
-				setIsAdmin(data.username === "admin");
+        setIsAdmin(data.username === "admin");
       });
-    }, [])
+  }, [])
   return (
     <div className="EXPLOREDISPLAY pb-[200px] pt-[20px] max-w-full h-full flex mx-[30px] justify-center mt-10 flex-wrap overflow-scroll shadow-inner">
       {data.length >= 1 ? (

@@ -3,18 +3,12 @@ import SocialDisplay from "@/components/SocialDisplay";
 require("dotenv").config();
 
 export default function Social() {
-    return (
-        <Layout
-            title="Munchbox - Social."
-            topClass="SOCIALPAGE w-full h-screen"
-        >
-            <SocialDisplay />
-        </Layout>
-    );
-}
-
-export async function getServerSideProps() {
-    return {
-        props: {},
-    };
+  return (
+    <Layout
+      title="Munchbox - Social."
+      topClass="SOCIALPAGE w-full h-screen"
+    >
+      <SocialDisplay />
+    </Layout>
+  );
 }

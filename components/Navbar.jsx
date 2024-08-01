@@ -46,7 +46,7 @@ export default function Navbar(props) {
   const links = {
     home: "/",
     explore: "/explore",
-    social: "#social",
+    social: "/social",
     getStarted: "/auth",
     newRecipe: "/recipes/new",
   };
@@ -99,26 +99,22 @@ export default function Navbar(props) {
       >
         <div className="BARS">
           <div
-            className={`BAR relative w-[38px] bg-white h-[6px] my-[5px] rounded transition-all duration-500 ease-in-out ${
-              menuToggled ? "rotate-[45deg] translate-y-[10px]" : ""
-            }`}
+            className={`BAR relative w-[38px] bg-white h-[6px] my-[5px] rounded transition-all duration-500 ease-in-out ${menuToggled ? "rotate-[45deg] translate-y-[10px]" : ""
+              }`}
           ></div>
           <div
-            className={`BAR relative w-[38px] bg-white h-[6px] my-[5px] rounded transition-all duration-500 ease-in-out ${
-              menuToggled ? "opacity-0" : ""
-            }`}
+            className={`BAR relative w-[38px] bg-white h-[6px] my-[5px] rounded transition-all duration-500 ease-in-out ${menuToggled ? "opacity-0" : ""
+              }`}
           ></div>
           <div
-            className={`BAR relative w-[38px] bg-white h-[6px] my-[5px] rounded transition-all duration-500 ease-in-out ${
-              menuToggled ? "rotate-[-45deg] translate-y-[-12px]" : ""
-            }`}
+            className={`BAR relative w-[38px] bg-white h-[6px] my-[5px] rounded transition-all duration-500 ease-in-out ${menuToggled ? "rotate-[-45deg] translate-y-[-12px]" : ""
+              }`}
           ></div>
         </div>
       </div>
       <div
-        className={`Navbar-MobileMenu transition-all flex origin-top-right justify-evenly items-center duration-150 z-10 left-0 absolute top-[70px] md:hidden bg-gray-900 w-full h-[90px] ${
-          menuToggled ? "scale-1" : "scale-y-0"
-        }`}
+        className={`Navbar-MobileMenu transition-all flex origin-top-right justify-evenly items-center duration-150 z-10 left-0 absolute top-[70px] md:hidden bg-gray-900 w-full h-[90px] ${menuToggled ? "scale-1" : "scale-y-0"
+          }`}
       >
         <MobileNavbarItem href={links.home} icon={FaHome}>
           Home
