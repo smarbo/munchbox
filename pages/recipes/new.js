@@ -83,7 +83,7 @@ export default function NewRecipePage() {
           // body.creator = username;
           // body.image = selectedImage;
           try {
-            const res = await fetch("http://localhost:3000/api/recipes/", {
+            const res = await fetch("https://munchbox.vercel.app/api/recipes/", {
               method: "POST",
               headers: {
                 "munchbox-auth-key": authKey,
